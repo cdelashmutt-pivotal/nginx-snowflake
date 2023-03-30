@@ -1,0 +1,19 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: snowflake
+  labels:
+    app.kubernetes.io/part-of: snowflake
+    apps.tanzu.vmware.com/workload-type: web
+spec:
+  build:
+    env:
+    - name: BP_WEB_SERVER
+      value: nginx
+  source:
+    git:
+      url: https://github.com/cdelashmutt-pivotal/nginx-snowflake
+      ref:
+        branch: main
+    subPath: site
