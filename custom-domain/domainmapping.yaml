@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: DomainMapping
+metadata:
+  name: #@ "special-snowflake." + data.values.ingress_domain
+  namespace: #@ data.values.workload.namespace
+spec:
+  ref:
+    name: #@ data.values.workload.name
+    kind: Service
+    apiVersion: serving.knative.dev/v1
+  #@ if hasattr(data.values, "tls_secret"):
+  tls:
+    secretName: #@ data.values.tls_secret
+  #@ end

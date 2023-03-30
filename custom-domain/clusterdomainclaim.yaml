@@ -1,0 +1,8 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: networking.internal.knative.dev/v1alpha1
+kind: ClusterDomainClaim
+metadata:
+  name: #@ "special-snowflake." + data.values.ingress_domain
+spec:
+  namespace: #@ data.values.workload.namespace
